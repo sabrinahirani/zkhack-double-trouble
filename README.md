@@ -129,6 +129,8 @@ Using this, we can substitute back to recover the secret vector $\vec{a}$.
 
 > **Note:** This is not a soundness attack. This breaks the zero-knowledge property by extracting the witness $\vec{a}$ from multiple valid transcripts
 
+---
+
 #### Commands
 
 ```rust
