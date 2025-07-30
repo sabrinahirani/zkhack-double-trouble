@@ -112,7 +112,7 @@ $$\left\{
 \vec{a} = \vec{s}_1 - \gamma_1 \cdot \vec{r}_1 \\
 \vec{a} = \vec{s}_2 - \gamma_2 \cdot \vec{r}_2
 \end{array}
-\right$$
+\right.$$
 $$\implies \vec{s}_1 - \vec{s}_2 = \gamma_1 \cdot \vec{r}_1 - \gamma_2 \cdot \vec{r}_2$$
 
 *We also observe the following:*
