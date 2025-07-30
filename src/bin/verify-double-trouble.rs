@@ -17,23 +17,22 @@ fn main() {
     assert!(verify(&ck, &instance2, &proof2));
 
     let (a, comm_a_rand): (Vec<Fr>, Fr) = {
-        // compute the Fiat-Shamir challenges for each instance:
+        
+        // knowns
+        let s1 = &proof1.response.s;
+        let s2 = &proof2.response.s;
         let gamma1: Fr = challenge(&ck, &instance1, &proof1.commitment);
         let gamma2: Fr = challenge(&ck, &instance2, &proof2.commitment);
 
-        // s‑vectors: a + γ r
-        let s1 = &proof1.response.s;
-        let s2 = &proof2.response.s;
-
         // compute r₁ = (s₁ − s₂) / (γ₁ − 2·γ₂)
-        let denom = gamma1 - gamma2.double();
-        let denom_inv = denom.inverse().unwrap();
+        let gamma_difference = gamma1 - gamma2.double();
+        let gamma_difference_inv = gamma_difference.inverse().unwrap();
         let mut r1 = Vec::with_capacity(s1.len());
         for (si1, si2) in s1.iter().zip(s2.iter()) {
-            r1.push((*si1 - *si2) * denom_inv);
+            r1.push((*si1 - *si2) * gamma_difference_inv);
         }
 
-        // now compute a = s₁ − γ₁·r₁
+        // compute a = s₁ − γ₁·r₁
         let mut a = Vec::with_capacity(s1.len());
         for (si1, ri1) in s1.iter().zip(r1.iter()) {
             a.push(*si1 - gamma1 * *ri1);
@@ -44,7 +43,7 @@ fn main() {
         let u2 = proof2.response.u;
 
         // recover ρ₁ = (u₁ − u₂) / (γ₁ − 2·γ₂)
-        let rho1 = (u1 - u2) * denom_inv;
+        let rho1 = (u1 - u2) * gamma_difference_inv;
 
         // recover α = u₁ − γ₁·ρ₁
         let alpha = u1 - gamma1 * rho1;
