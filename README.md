@@ -30,9 +30,7 @@ s \cdot G \stackrel{?}{=} R + c \cdot P
 $$
 
 *Since:*
-$$
-s \cdot G = (r + c \cdot x) \cdot G = (r \cdot G) + c \cdot (x \cdot G) = R + c \cdot P
-$$
+$$s \cdot G = (r + c \cdot x) \cdot G = (r \cdot G) + c \cdot (x \cdot G) = R + c \cdot P$$
 
 > **🔒 Security Assumption:**  
 > The *Discrete Logarithm (DLOG) Assumption* ensures that the protocol is sound. 
